@@ -361,7 +361,107 @@
      {name:"iphone",price:12000},
      {name:"imac",price:18000}
   ]
+
+
+  数组的循环操作
+  举个例子:
+  let arr1 = [
+    {title:"响应式布局",category:"css"},
+    {title:"盒模型",category:"css"},
+    {title:"多表查询",category:"mysql"}
+  ]；
+
+  for循环
+  for（let i = 0; i < arr1.length; i++）{
+    arr[i].title = `杭瑞山${arr[i].title}`;
+  }
+  -->arr1:
+  [
+    {title:"杭瑞山响应式布局",category:"css"},
+    {title:"杭瑞山盒模型",category:"css"},
+    {title:"杭瑞山多表查询",category:"mysql"}
+  ]
+
+  for-of 循环（值操作）
+  for(const value of arr1){
+    value.title = `杭瑞山${value.title}`;
+  }
+  -->arr1:
+  [
+    {title:"杭瑞山响应式布局",category:"css"},
+    {title:"杭瑞山盒模型",category:"css"},
+    {title:"杭瑞山多表查询",category:"mysql"}
+  ]
+
+  for-in 循环（索引操作）
+  for(const key in arr1){
+    arr1[key].title = `杭瑞山${arr1[key].title}`;
+  }
+  -->arr1:
+  [
+    {title:"杭瑞山响应式布局",category:"css"},
+    {title:"杭瑞山盒模型",category:"css"},
+    {title:"杭瑞山多表查询",category:"mysql"}
+  ]
+
+  forEach()循环
+  let arr1 = [
+    {title:"响应式布局",category:"css"},
+    {title:"盒模型",category:"css"},
+    {title:"多表查询",category:"mysql"}
+  ]；
+
+  arr1.forEach(function(item,index,lessons){
+    console.log(item);
+    -->
+    {title:"杭瑞山响应式布局",category:"css"}
+    {title:"杭瑞山盒模型",category:"css"}
+    {title:"杭瑞山多表查询",category:"mysql"}
+    console.log(index);
+    -->
+    0
+    1
+    2
+    console.log(lessons);
+    -->
+    [{title:"响应式布局",category:"css"},{title:"盒模型",category:"css"},{title:"多表查询",category:"mysql"}]
+    [{title:"响应式布局",category:"css"},{title:"盒模型",category:"css"},{title:"多表查询",category:"mysql"}]
+    [{title:"响应式布局",category:"css"},{title:"盒模型",category:"css"},{title:"多表查询",category:"mysql"}]
+  });
+
+  利用forEach对对象类型数组进行截断操作
+   let arr1 = [
+    {title:"响应式布局",category:"css"},
+    {title:"盒模型",category:"css"},
+    {title:"多表查询",category:"mysql"}
+  ]；
+  arr1.forEach(function(item){
+    item.title = item.title.substr(0,2);//从第0个位置开始截取，保留2个字符
+  })
+  console.log(arr1);
+  -->
+  [
+    {title:"响应",category:"css"},
+    {title:"盒模",category:"css"},
+    {title:"多表",category:"mysql"}
+  ]；
+
+  forEach函数可以直接操作Dom元素
+  举个例子：
+  let lis = document.querySelectAll("ul li");
+  lis.forEach(function(item){
+    item.addEventListener("click",function(){
+      console.log("666")
+    })
+  });
+
   
+
+
+
+   
+
+
 
   
 
