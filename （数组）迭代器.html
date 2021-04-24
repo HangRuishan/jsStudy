@@ -1,0 +1,59 @@
+<html>
+<body>
+
+<script type="text/javascript">
+
+    let arr = ["hang","rui","shan"];
+    //let keys = arr.keys();//取数组索引 
+    let values = arr.values();//取数组值 
+    //document.write(keys.next());
+    // console.log(keys.next());
+    // console.log(keys.next());
+    // console.log(keys.next());
+    // console.log(keys.next());
+    // let {value,done} = keys.next();
+    // console.log(value,done);
+
+    //可以利用迭代方法对数组进行遍历操作
+    // while(({value,done} = values.next()) && done == false){
+    //     console.log(value);
+    // }
+
+    //利用for-of来操作迭代对象
+    //1.利用arr.values()取数组的值
+    for (const value of arr.values()){
+        console.log(value);
+    }
+    //利用arr.keys()取数组的索引
+    for (const key of arr.keys()){
+        console.log(key);
+    }
+
+    //另一种（数组）可迭代对象，即返回数组的索引 也返回数组的值（数组形式）
+    let entries = arr.entries();
+    console.log(entries.next());
+    //let {done,value} = entries.next();
+    //console.log(done,value);
+    let {
+        done,
+        value:[a,b]
+    } = entries.next();
+    console.log(a,b);
+
+    //利用for-of
+    for(const [key,value] of arr.entries()){
+        console.log(value);
+    }
+
+
+
+    
+
+
+
+    
+
+</script>
+
+</body>
+</html>

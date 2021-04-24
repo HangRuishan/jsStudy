@@ -455,6 +455,101 @@
     })
   });
 
+  iterator 迭代器 操作数组
+  高效处理数组方法（every，some）
+  every；全部为真则返回为真，有一个为假，则结束执行，返回false
+  let arr = ["hang","rui","shan"];
+  let status = arr.every(function(value,index,arr){  //参数值解释，value，数组值；index，数组索引；arr，原数组
+      console.log(value);
+      console.log(index);
+      console.log(arr);
+      return true;
+      return false
+  });
+  对于 arr.every(),该函数返回值为布尔类型，当true时持续执行 当false时停止执行；
+  console.log(status);
+
+  利用every函数判断学生是否全部及格
+  const user = [
+    {name:"aa",js:100},
+    {name:"ab",js:85},
+    {name:"ac",js:59},
+  ];
+  const res = user.every(function(item){
+    return item.js >= 60;
+  })
+  //若js大于等于60，则返回true，继续循环执行，若小于60则返回false中断遍历执行操作；
+
+  some函数；有一个为真，则停止执行返回为真，当返回值为家时，则继续执行 直到true或者数组遍历结束；
+  let arr = ["hang","rui","shan"];
+  let res = arr.some(function(value,index,arr){
+      console.log(value);
+      return false;
+  })
+  console.log(res);
+
+  filter函数（数组的遍历过滤操作）要的拿出来，不要的扔掉;即取出满足你条件的那一部分数据；
+  let arr = ["hang","rui","shan"];
+  let newArr = arr.filter(function(value,index,arr){
+    return true;
+    return false;
+  });//对数组进行遍历操作，返回值为原数组元素，当返回值为真时，取出原数组元素，当返回值为假时，不返回原数组元素；
+  console.log(newArray);
+
+  数组的映射操作
+  arr.map()函数//数组遍历操作 对数组进行操作，目的是返回一个新的数组
+  let arr = ["hang","rui","shan"];
+  arr.map(function(value,index,arr){
+    console.log(value);
+    console.log(index);
+    console.log(arr);
+  });
+  let res = arr.map(function(value,index,arr){
+    return 1;
+  });//循环三次，返回值会被res接收,res返回一个新的数组，不对原数组进行改变(值类型)
+  console.log(res)
+  -->[1,1,1];
+
+  对于引用类型？则会改变原数组（在内存地址上进行修改）
+
+  reduce方法,第一个参数 为匿名函数，
+  let arr = [1,2,3,4,5];
+  arr.reduce(function(pre,value,index,array){  
+  // 参数解释，对于pre，理解为上一次调用的返回值（该函数也是对数组进行遍历操作）；
+  // 当第一次调用时，pre为数组第1项，value值为2？默认进行了对数组的第二个元素进行提取？
+  // 未传递第二个参数
+  console.log(pre,value);
+  return 99;
+  })
+  //传递第二个参数（第一次调用时的前一次调用的返回值）
+  arr.reduce(function(pre,value,index,array){  
+   //传递第二个参数
+  console.log(pre,value);
+  return 99;
+  }，0)
+   //该函数可以用作统计数组中某个元素出现的的次数功能
+   //适合用于统计功能设计
+    
+
+
+   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   
 
 
