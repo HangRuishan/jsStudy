@@ -1,0 +1,22 @@
+<html>
+  <body>
+    <script>
+      let user1 = {
+        name: "李四",
+        key: Symbol(),
+      };
+      let user2 = {
+        name: "李四",
+        key: Symbol(),
+      };
+
+      let grade = {
+        [user1.key]: { js: 100, css: 99 },
+        [user2.key]: { js: 59, css: 33 },
+      };
+      console.log(grade);
+      console.log(grade[user1.key]);
+    </script>
+  </body>
+</html>
+

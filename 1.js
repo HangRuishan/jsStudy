@@ -529,6 +529,103 @@
   }，0)
    //该函数可以用作统计数组中某个元素出现的的次数功能
    //适合用于统计功能设计
+
+    reeduce函数举例，商品价格排序，选出最高价商品
+    let cart = [
+      {name:"iphone",price:12000},
+      {name:"imac",price:18000},
+      {name:"ipad",price:3200}
+    ];
+
+    function maxPrice(goods){
+      rerurn cart.reduce(function(pre,cur){
+        return pre.price > cur.price ? pre : cur;
+      })
+    }
+    console.log(maxPrice(cart));
+    
+    例子;商品价格汇总
+    function sum(goods){
+        return goods.reduce(function(total,cur){
+          return (total += cur["price"])
+        },0);
+    }
+    console.log(sum(cart));
+    例子：获取价格超过1万元的商品的名称；
+    let cart = [
+      {name:"iphone",price:12000},
+      {name:"imac",price:18000},
+      {name:"ipad",price:3200}
+    ];
+    function getNameByPrice(goods,price){
+      return goods.reduce(function(arr,cur){
+        if(cur.price > price){
+          arr.push(cur);
+        }
+        return arr;
+      },[]).map(function(item){return item.name});
+    }
+    console.table(getNameByPrice(cart,10000));
+
+    数组去重例子
+    let arr = [1,2,3,3,4,4,2,1];
+    let newArr = arr.reduce(function(arr,cur){
+      if(arr.include(cur) === false){
+        arr.push(cur);
+      }
+      return arr;
+    },[]);
+    console.log(newArr);
+
+    //数组结束
+    //js新增特性
+    symbol（可以让变量值永远唯一）
+    1.定义symbol的第一种方式
+    let hrs1 = Symbol("杭瑞山1号");
+    let hrs2 = Symbol("杭瑞山2号");
+    console.log(hd === edu);-->false
+    console.log(hrs1.description);-->获取symbol类型变量的描述值
+    2.定义symbol的第2种方式(？？？Symbol被反复使用时适用该定义方式)
+    let hrs3 = Symbol.for("杭瑞山3号")；
+    console.log(hrs3);-->输出：杭瑞山3号；
+    let hrs = Symbol.for("杭瑞山3号")；
+    console.log(hrs3 == hrs);-->true;
+    console.log(Symbol.keyFor(hrs3));
+
+    实例，使用symbol解决字符串耦合的问题
+    let user1 = "李四"；
+    let user2 = "李四"；
+    let grade = {
+      [user1]:{js:100,css:99},
+      [user2]:{js:59,css:33}//中括号，用于获取变量
+    };
+    console.log(grade);--》只输出1个李四（被覆盖）
+    可以使用symbol的方式解决
+
+    set类型
+    //set类型可用于放多个数据，但是不能放置重复的数据
+    let set = new Set();
+    set.add(1);
+    set.add(1);
+    set.add("1");
+    console.log(set);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
 
