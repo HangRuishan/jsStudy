@@ -1,0 +1,68 @@
+<html>
+  <body>
+    <script>
+      let map = new Map();
+      map.set("name", "杭瑞山");
+      map.set(function () {}, "函数");
+      map.set({}, "对象");
+      map.set(1, "数字");
+      console.log(map);
+
+      //通过构造函数创建map类型
+      let map1 = new Map([
+        ["1", "111111"],
+        ["2", "222222"],
+      ]);
+      console.log(map1);
+
+      //Map类型增删改查
+      let obj = {
+        name: "杭瑞山",
+      };
+      let map3 = new Map();
+      map3.set(obj, "lalalalala.com");
+      map3.set("name", "hangruishan1");
+      console.log(map3.get(obj));
+      //console.log(map3.delete(obj));
+      //map3.clear();
+      console.log(map3.has("name"));
+      console.log(map3);
+
+      //Map类型遍历
+
+      let hd = new Map([
+        ["name", "杭瑞山"],
+        ["sex", "Man"],
+      ]);
+      hd.set("lalala", "hahaha");
+      console.log(hd.keys());
+      console.log(hd.values());
+      console.log(hd.entries());
+
+      for (const [key, value] of hd.entries()) {
+        console.log(key, value);
+      }
+
+      hd.forEach((value, key) => {
+        console.log(value, key);
+      });
+
+      //Map类型转换操作
+
+      console.log([...hd]);
+      console.log([...hd.keys()]);
+      console.log([...hd.values()]);
+
+      let newArr = [...hd].filter((item) => {
+        return item[1].includes("杭瑞山");
+      });
+      console.log(newArr);
+      let edu = new Map(newArr);
+      console.log(...edu.values());
+
+      //WeakMap
+      //WeakMap 的键名必须为引用类型
+      //体现弱类型 weak；弱引用类型不可迭代
+    </script>
+  </body>
+</html>
