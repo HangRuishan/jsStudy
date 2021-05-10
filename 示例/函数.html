@@ -8,13 +8,13 @@
       //匿名函数与具名函数
       //匿名函数
       let fun = function () {
-        console.log("杭瑞山");
+        console.log('杭瑞山');
       };
       fun(); //匿名函数不具备函数提升功能
       //具名函数
       show(); //函数提升
       function show() {
-        console.log("hangruishan.com");
+        console.log('hangruishan.com');
       }
       //判断函数是否为对象类型；
       console.log(fun instanceof Object);
@@ -75,7 +75,7 @@
       //当前对象引用
 
       let hrs3 = {
-        name: "杭瑞山",
+        name: '杭瑞山',
         show: function () {
           return this.name;
         },
@@ -88,8 +88,8 @@
 
       //通过常量改变this指针；类方法中this指的是该对象，普通函数中的this指的是全局window对象
       let hrs4 = {
-        site: "杭瑞山",
-        lists: ["js", "css", "mysql"],
+        site: '杭瑞山',
+        lists: ['js', 'css', 'mysql'],
         show: function () {
           //该函数为普通函数定义模式，当换成箭头函数定义模式时，this指的是上下文
           const self = this;
@@ -103,8 +103,8 @@
 
       //箭头函数中的this
       let hrs5 = {
-        site: "杭瑞山",
-        lists: ["js", "css", "mysql"],
+        site: '杭瑞山',
+        lists: ['js', 'css', 'mysql'],
         show: function () {
           //该函数为普通函数定义模式，当换成箭头函数定义模式时，this指的是上下文(父级作用域中的this)
           //const self = this;
@@ -130,23 +130,23 @@
       //   console.log(Dom.bind());
 
       //多个按钮的情况
-      let Dom = {
-        site: "杭瑞山嘿嘿嘿",
-        handleEvemt: function (event) {
-          console.log(this.site + event.target.innerHTML);
-        },
-        bind: function () {
-          let buttons = document.querySelectorAll("button");
-          console.log(document.querySelectorAll("button"));
-          console.log(buttons.length);
-          buttons.forEach((elem) => {
-            elem.addEventListener("click", (event) => {
-              console.log(this.site + event.target.innerHTML);
-            });
-          });
-        },
-      };
-      console.log(Dom.bind());
+      // let Dom = {
+      //   site: "杭瑞山嘿嘿嘿",
+      //   handleEvemt: function (event) {
+      //     console.log(this.site + event.target.innerHTML);
+      //   },
+      //   bind: function () {
+      //     let buttons = document.querySelectorAll("button");
+      //     console.log(document.querySelectorAll("button"));
+      //     console.log(buttons.length);
+      //     buttons.forEach((elem) => {
+      //       elem.addEventListener("click", (event) => {
+      //         console.log(this.site + event.target.innerHTML);
+      //       });
+      //     });
+      //   },
+      // };
+      // console.log(Dom.bind());
 
       //总结 在箭头函数中，this指向的时上下文对象，在非箭头的普通旧模式中的函数中this指向的是全局的window对象
 
@@ -156,18 +156,18 @@
       function User(name) {
         this.name = name;
       }
-      let hrs6 = new User("杭瑞山");
+      let hrs6 = new User('杭瑞山');
       console.log(hrs6);
-      let hrs7 = { url: "hangruishan.com" };
-      User.call(hrs7, "非常666");
+      let hrs7 = { url: 'hangruishan.com' };
+      User.call(hrs7, '非常666');
       console.log(hrs7);
 
       //call 与 apply(在传递参数方面是不同的)
       let hrs8 = {
-        name: "杭瑞山8号",
+        name: '杭瑞山8号',
       };
       let hrs9 = {
-        name: "杭瑞山9号",
+        name: '杭瑞山9号',
       };
       function User1() {
         console.log(this.name);
@@ -181,8 +181,53 @@
       function User2(web, url) {
         console.log(this.name + web + url);
       }
-      User2.call(hrs8, "hahahaha", "lalalalala");
-      User2.apply(hrs9, ["wawawawawa", "heiheiheihei"]); //立刻执行，参数传递用数组形式；
+      User2.call(hrs8, 'hahahaha', 'lalalalala');
+      User2.apply(hrs9, ['wawawawawa', 'heiheiheihei']); //立刻执行，参数传递用数组形式；
+
+      function newShow() {
+        alert(this.innerHTML);
+      }
+      let buttons = document.querySelectorAll('button');
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', (event) => {
+          newShow.call(event.target);
+        });
+      }
+
+      //构造函数方法继承 //call 与 apply
+      function Article() {
+        this.url = 'article/lists';
+        this.get = function (params) {
+          console.log(Object.keys(params));
+          let hrs10 = Object.keys(params)
+            .map((k) => `${k} = ${params[k]}`)
+            .join('&');
+          console.log(`https://hangruishan.com/${this.url}?${hrs10}`);
+        };
+      }
+
+      let a = new Article();
+      console.log(a.get({ id: 1, cat: 'js' }));
+
+      //bind
+      //对于call与apply--》立即执行
+      //bind  非立即执行；生成一个新的函数；
+      //三者的目的是一样的 ，调用函数，改变this指向；
+
+      function hrs11() {
+        console.log(this.name);
+      }
+      hrs11.bind({ name: '杭瑞山' })();
+
+      function hrs12(a, b) {
+        console.log(a, b);
+        console.log(this.f);
+        return this.f + a + b;
+      }
+      //console.log(hrs12.call({ f: 1 }, 1, 1)); //call 立即执行 直接传参
+      let func = hrs12.bind({ f: 1 }, 2, 3);
+      console.log(func());
+      //bind 非立即执行，可以进行两次参数的传递；
     </script>
   </body>
 </html>
