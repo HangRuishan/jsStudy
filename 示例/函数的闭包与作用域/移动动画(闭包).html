@@ -1,0 +1,40 @@
+<html>
+    <body>
+    <style>
+    button{
+        position: absolute;
+    }
+    </style>
+    <!-- <button message="杭瑞山">hangruishanhangruishanhangruishanhangruishan</button> -->
+    <button message=".com">hangruishan.com</hangruishan></button>
+</body>
+<script>
+    let btns = document.querySelectorAll("button");
+    btns.forEach(function(item){
+        // let left =1
+        // let interval = false
+        let bind = false;
+        item.addEventListener("click",function(){ 
+            if(!bind){
+                let left =1
+                bind = setInterval(function(){
+                item.style.left = left++ + "px"
+            },100)
+            }  
+        })
+    })
+
+    //关于this
+    let hrs = {
+        user:"杭瑞山",
+        get: function(){
+            return () => {
+                return this.user
+            } 
+        }
+    } 
+
+    let a = hrs.get();
+    console.log(a(),"lalalala");
+</script>
+</html>
