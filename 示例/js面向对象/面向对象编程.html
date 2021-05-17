@@ -1,0 +1,191 @@
+<html>
+  <body>
+    <style></style>
+    <script>
+      //属性的基本操作方法
+      let user = {
+        name: '杭瑞山干哈',
+        'my age': 18,
+      };
+      //属性取值
+      console.log(user.name);
+      console.log(user['name']);
+      console.log(user['my age']);
+      //属性遍历（需使用中括号）
+      for (const key in user) {
+        console.log(user[key]);
+      }
+      //对象动态添加属性
+      user.age = 25;
+      user.get = function () {
+        return `${this.name}的年龄是${this['my age']}`;
+      };
+      console.log(user.get());
+      //对象删除属性
+      delete user.age;
+      console.log(user.age);
+
+      //对象的引用传地址（引用类型传地址哦）
+      //值传递与址传递
+
+      //对象中的展开语法
+      let hrs = { name: '杭瑞山', age: 25 };
+      let hrs1 = { ...hrs, sex: '男' };
+      console.log(hrs1);
+
+      //使用展开语法 修改对象中的属性
+      function upload(params) {
+        let config = {
+          type: '*.jpeg,*.png',
+          size: 100,
+        };
+        config = { ...config, ...params };
+        console.log(config);
+      }
+      console.log(upload({ size: 99, type: '*.gif' }));
+
+      //对象中的解构（元素结构分解处理）
+      let hrs2 = { name: '杭瑞山', age: 18 };
+      let { name: n, age: a } = hrs2;
+      console.log(n);
+      console.log(a);
+      let { name, age } = hrs2;
+      console.log(name);
+      console.log(age);
+
+      function hrs3() {
+        return { name1: '啦啦啦啦啦', age1: 88 };
+      }
+      let { name1, age1 } = hrs3();
+      console.log(name1, age1);
+
+      function hrs4({ name2, age2 }) {
+        console.log(name2, age2);
+      }
+
+      hrs4({ name2: '嘿嘿嘿', age2: 99 });
+
+      let { random } = Math;
+      console.log(random());
+
+      //数组解构
+      let arr = ['后盾人', 'HangRuishan.com'];
+      let [, ass] = arr;
+      console.log(ass);
+
+      let hrs5 = '叭叭叭baba',
+        url = 'bababa.com';
+      let opt = { hrs5, url };
+      console.log(opt);
+
+      //多层对象的解构
+      let hrs6 = {
+        name3: 'HRS6',
+        lesson: {
+          title: 'javaScript',
+        },
+      };
+      let {
+        name3,
+        lesson: { title },
+      } = hrs6;
+      console.log(name3, title);
+
+      let hrs7 = {
+        name4: 'wawawa',
+        url4: 'wawawa.com',
+        title4: '开源创造未来',
+      };
+      let { url4, name4, title4 = 'wawaola' } = hrs7;
+      console.log(url4, name4, title4);
+
+      function hrs8(options = {}) {
+        let { width = 200, height = 100, backgroundColor = 'red' } = options;
+        console.log(width, height, backgroundColor);
+      }
+
+      hrs8({ width: 300 });
+
+      function createElement(options = {}) {
+        let { width = 200, height = 100, backgroundColor = 'red' } = options;
+        const div = document.createElement('div');
+        div.style.width = width + 'px';
+        div.style.height = height + 'px';
+        div.style.backgroundColor = backgroundColor;
+        document.body.appendChild(div);
+      }
+      createElement({ width: 800 });
+
+      //解构作为函数参数的使用
+      function hrs9({ name5, age5 }) {
+        console.log(name5);
+        console.log(name5, age5);
+      }
+      hrs9({ name5: 'g a g a', age5: 77 });
+
+      function hrs10(name6, { sex2: a, age6: b }) {
+        //console.log(name5);
+        console.log(name6, a, b);
+      }
+      hrs10('杭哈哈', { sex2: '男', age6: 77 });
+
+      //对象中属性的添加与删除
+      let hrs11 = {};
+      hrs11.name7 = 'walala';
+      hrs11['age7'] = 22;
+      console.log(hrs11);
+      delete hrs11.age7;
+      console.log(hrs11);
+
+      //判断当前对象(不涉及继承与原型链等属性)是否含有某属性
+      //该方法只看自己 不看其父亲
+      console.log(hrs11.hasOwnProperty('name7'));
+      console.log(hrs11.hasOwnProperty('age7'));
+
+      //对象的属性检测
+      //1.对象上有该属性；
+      //2.原型上有该属性（父级存在该属性）(_proto_)
+
+      let arr1 = [1, 2, 3];
+      console.log(arr1);
+      console.log(arr1.hasOwnProperty('length'));
+      console.log(arr1.hasOwnProperty('concat'));
+
+      //检测自己及其父亲是否含有该属性
+      console.log('concat' in arr1);
+      //原型与原型链
+
+      let hrs12 = {
+        name: 'babala',
+      };
+      let hrs13 = {
+        url: 'babala.com',
+      };
+      Object.setPrototypeOf(hrs12, hrs13);
+      console.log(hrs12);
+      console.log(hrs12.hasOwnProperty('url'));
+      console.log('url' in hrs12);
+
+      function hrs14(options2) {
+        if (!options2.hasOwnProperty('host')) {
+          throw new Error('必须设置主机地址！');
+        }
+        console.log(options2.host);
+      }
+      hrs14({ user: 'admin', host: 'hangruishan.com' });
+
+      let hrs15 = {};
+      let name8 = 'title';
+      hrs15[name8] = '真不错';
+      console.log(hrs15.title);
+
+      let id = 0;
+      let hrs16 = {};
+      hrs16[`id-${++id}`] = id;
+      hrs16[`id-${++id}`] = id;
+      hrs16[`id-${++id}`] = id;
+      hrs16[`id-${++id}`] = id;
+      console.log(hrs16);
+    </script>
+  </body>
+</html>

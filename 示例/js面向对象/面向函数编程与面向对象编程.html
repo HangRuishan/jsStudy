@@ -1,0 +1,35 @@
+<html>
+  <body>
+    <style></style>
+    <script>
+      //面向函数编程；
+      // let name = '杭瑞山';
+      // let grade = [
+      //   { subject: 'js', score: 99 },
+      //   { subject: 'css', score: 88 },
+      // ];
+      // function average(grade, name) {
+      //   let total = grade.reduce((total, l) => total + l.score, 0);
+      //   return `${name}的平均成绩是：${total / grade.length}`;
+      // }
+      // console.log(average(grade, name));
+
+      //面向对象编程；
+
+      let user = {
+        name: '杭瑞山',
+        grade: [
+          { name: 'js', score: 99 },
+          { name: 'css', score: 88 },
+        ],
+        average: function () {
+          let total = this.grade.reduce((t, l) => t + l.score, 0);
+          console.log(total);
+          return `${this.name}平均成绩是：${total / this.grade.length}`;
+        }, //对象中的函数 一般称之为方法
+      };
+
+      console.log(user.average());
+    </script>
+  </body>
+</html>
