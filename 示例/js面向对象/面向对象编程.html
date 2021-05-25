@@ -178,7 +178,7 @@
       let name8 = 'title';
       hrs15[name8] = '真不错';
       console.log(hrs15.title);
-
+      //属性通过计算产生
       let id = 0;
       let hrs16 = {};
       hrs16[`id-${++id}`] = id;
@@ -186,6 +186,149 @@
       hrs16[`id-${++id}`] = id;
       hrs16[`id-${++id}`] = id;
       console.log(hrs16);
+      //通过计算属性方式进行动态改变属性
+      const lessons1 = [
+        { title: 'java', category: 'java-category' },
+        { title: 'javaScript', category: 'javaScript-category' },
+        { title: 'css', category: 'css-category' },
+      ];
+
+      let res = lessons1.reduce((obj, cur, index) => {
+        obj[`${cur['category']}-${index + 1}`] = cur;
+        return obj;
+      }, {});
+
+      console.log(JSON.stringify(res, null, 2));
+
+      //对象的合并
+      let hrs17 = Object.assign({ a: 1 }, { b: 2 });
+      console.log(hrs17);
+
+      function hrs18(params) {
+        let options = {
+          size: 8888,
+        };
+        options = Object.assign(options, params);
+        console.log(JSON.stringify(options, null, 2));
+      }
+      hrs18({ size: 9999, type: '.gif', name: 'photo' });
+
+      //获取对象中的属性名或属性值、
+      let hrs19 = {
+        name: '杭瑞山19',
+        year: '1996',
+      };
+      //1.获取属性名
+      console.log(Object.keys(hrs19));
+      //2.获取属性值
+      console.log(Object.values(hrs19));
+      //3.获取属性名与值
+      console.log(Object.entries(hrs19));
+      //JSON字符串形式输出
+      console.log(JSON.stringify(Object.entries(hrs19), null, 2));
+
+      //循环形式操作对象
+      //for-in
+      for (const key in hrs19) {
+        //console.log(key); //输出属性名
+        console.log(hrs19[key]); //输出属性值
+      }
+      //for-of 默认无法操作对象
+      //换另一种方式
+      //取属性名
+      for (const iterator of Object.keys(hrs19)) {
+        console.log(iterator);
+      }
+      //取属性值
+      for (const iterator of Object.values(hrs19)) {
+        console.log(iterator);
+      }
+      //取属性名加属性值;//利用数组解构分别获取数组属性名或者属性值
+      for (const [key, value] of Object.entries(hrs19)) {
+        console.log(key);
+      }
+      const lessons2 = [
+        { title: 'java', category: 'java-category' },
+        { title: 'javaScript', category: 'javaScript-category' },
+        { title: 'css', category: 'css-category' },
+      ];
+      let ul = document.createElement('ul');
+      for (const lesson1 of lessons2) {
+        let li = document.createElement('li');
+        li.innerHTML = `课程：${lesson1.title},描述：${lesson1.category}`;
+        ul.appendChild(li);
+      }
+      document.body.appendChild(ul);
+
+      //对象浅拷贝的多种操作方法（对象的复制）
+      let hrs20 = { name: '杭瑞山20' };
+      let hrs20copy = {
+        name: hrs20.name,
+      };
+      console.log(hrs20copy);
+      hrs20copy.name = 'new杭瑞山';
+      console.log(hrs20copy);
+      console.log(hrs20);
+
+      //对象属性较多 采用循环赋值的方式
+      let hrs21 = {
+        name: '杭瑞山21',
+        url: 'HangRuishan21.com',
+      };
+      //let obj1 = {};
+      // for (const key in hrs21) {
+      //   obj1[key] = hrs21[key];
+      //   console.log(key);
+      // }
+      // console.log(hrs21);
+      // console.log(obj1);
+      // obj1.name = 'yahoo';
+      // console.log(obj1);
+
+      //assign 方法浅拷贝
+      // let obj1 = Object.assign({}, hrs21);
+      // console.log(obj1);
+
+      //...展开语法浅拷贝
+      let obj1 = { ...hrs21 };
+      console.log('展开语法浅拷贝', obj1);
+
+      //深拷贝，多层次分析；普通值类型仅传递值，对象类型传递地址，共享同一块内存地址；
+      let obj2 = {
+        name: '杭瑞山',
+        user: {
+          name: 'HangRuishan',
+        },
+      };
+      // let copyobj2 = {
+      //   name: obj2.name,
+      //   user: obj2.user,
+      // };
+
+      // copyobj2.user.name = 'Hang';
+      // console.log('copyobj2', copyobj2);
+      // console.log('obj2', JSON.stringify(obj2, null, 2));
+      // console.log('copyobj2', JSON.stringify(copyobj2, null, 2));
+
+      function copyobjFun(object) {
+        let copyobj2 = {};
+        // for (const key in object) {
+        //   copyobj2[key] = object[key];
+        // }
+        //递归形式深拷贝(重新开辟一块内存地址)
+        for (const key in object) {
+          copyobj2[key] =
+            typeof object[key] === 'object'
+              ? copyobjFun(object[key])
+              : object[key];
+        }
+        return copyobj2;
+      }
+      copyobj2 = copyobjFun(obj2);
+      copyobj2.name = '杭瑞山-修改';
+      copyobj2.user.name = 'HangRuishan-修改';
+      console.log('copyobj2', JSON.stringify(copyobj2, null, 2));
+      console.log('obj2', JSON.stringify(obj2, null, 2));
     </script>
   </body>
 </html>
