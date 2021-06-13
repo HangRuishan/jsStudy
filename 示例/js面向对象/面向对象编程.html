@@ -329,6 +329,32 @@
       copyobj2.user.name = 'HangRuishan-修改';
       console.log('copyobj2', JSON.stringify(copyobj2, null, 2));
       console.log('obj2', JSON.stringify(obj2, null, 2));
+
+      let obj3 = {
+        name: 'obj3Name',
+        user: {
+          name: '杭瑞山',
+        },
+        arr: [],
+      };
+
+      function copyobjFun1(obj) {
+        let res = obj instanceof Array ? [] : {};
+        for (const [k, v] of Object.entries(obj)) {
+          res[k] = typeof v === 'object' ? copyobjFun1(v) : v;
+        }
+        return res;
+      }
+
+      // let arr2 = ['111', '222', '333'];
+      // console.log(arr2);
+      console.log(Object.entries(obj3));
+      // console.log(JSON.stringify(Object.entries(arr2), null, 2));
+      // let testObj = {
+      //   name: '杭瑞山',
+      //   性别: '男',
+      // };
+      console.log(JSON.stringify(Object.entries(obj3), null, 2));
     </script>
   </body>
 </html>
